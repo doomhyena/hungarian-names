@@ -4,6 +4,12 @@ const path = require('path');
 class JsonHandler {
     constructor(filePaths) {
         this.filePaths = filePaths;
+        this.fileMap = {};
+
+        for (const filePath of filePaths) {
+            const base = path.basename(filePath); 
+            this.fileMap[base] = filePath;
+        }
     }
 
     fileExists(filePath) {
@@ -23,7 +29,6 @@ class JsonHandler {
 
         try {
             const data = fs.readFileSync(filePath, 'utf8');
-
             const parsed = JSON.parse(data);
 
             if (!parsed.names || !Array.isArray(parsed.names)) {
@@ -64,6 +69,17 @@ class JsonHandler {
             return null;
         }
         return allNames[index];
+    }
+
+    getNamesFromFile(filename) {
+        const filePath = this.fileMap[filename];
+        if (!filePath) {
+            console.warn(`No file registered with name: ${filename}`);
+            return null;
+        }
+
+        const data = this.readData(filePath);
+        return data ? data.names : null;
     }
 }
 

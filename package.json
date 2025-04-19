@@ -1,6 +1,6 @@
 {
   "name": "hungarian-names",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "This package contains all of the hungarian names",
   "main": "index.js",
   "scripts": {
