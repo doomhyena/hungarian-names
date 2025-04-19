@@ -24,10 +24,8 @@ class JsonHandler {
         try {
             const data = fs.readFileSync(filePath, 'utf8');
 
-            // Try to parse JSON
             const parsed = JSON.parse(data);
 
-            // Check expected structure
             if (!parsed.names || !Array.isArray(parsed.names)) {
                 console.warn(`Invalid structure in JSON file: ${filePath}. Expected a "names" array.`);
                 return null;
